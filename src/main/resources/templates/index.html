@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title></title>
+<!-- <link rel = "stylesheet" href = "css/style.css"/> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+<script th:inline="javascript">
+var stateEnum =  [[${T(com.thymeleaf.enums.StateEnum).values()}]]
+</script>
+</head>
+<body>
+	<form id="thymeform" th:object="${person}">
+		<div class="group">
+			<fieldset style="height: 150px; width: 200px;">
+				<label th:for="firstName">First Name</label> <input
+				th:field="*{firstName}" /> <label th:for="middleName">Middle
+					Name</label> <input th:field="*{middleName}" /> <label th:for="lastName">Middle
+					Name</label> <input th:field="*{lastName}" /> <label th:for="state">Country</label>
+				<select th:field="*{country}">
+					<option th:each="country : ${T(com.thymeleaf.enums.CountryEnum).values()}"
+						th:value="${country.code}" th:text="${country.name}"></option>
+				</select>
+
+				<label th:for="state">State</label>				
+				<!-- <select>
+					<option th:each="state : ${T(com.thymeleaf.enums.StateEnum).values()}"
+						th:value="${state.code}" th:text="${state.state}"></option>
+				</select> -->
+				<select id="stateDropDown" th:field="*{selectedState}">
+					<option th:each="state : *{states}"
+						th:value="${state.getCode()}" th:text="${state.getState()}"></option>
+				</select>
+			</fieldset>
+		</div>
+	</form>
+</body>
+
+</html>
